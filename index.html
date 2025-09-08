@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Safety Labs — Cyber Awareness Training Hub</title>
+  <!-- Favicon -->
+  <link rel="icon" href="https://dmj.one/logo.png" sizes="any" />
+  <!-- Bootstrap & Icons (cdnjs) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Government of India–inspired palette and sober presentation */
+    :root{
+      --goi-saffron:#FF9933;
+      --goi-green:#138808;
+      --goi-blue:#0a58ca; /* Chakra‑blue accent (accessible) */
+      --goi-blue-dark:#083b8a;
+      --goi-soft:#f3f6fb;
+    }
+    .brand-bar{background:var(--goi-blue-dark);color:#fff}
+    .brand-bar a{color:#fff;text-decoration:none}
+    .tri-strip{height:4px;background:linear-gradient(90deg,var(--goi-saffron) 0 33.33%,#ffffff 33.33% 66.66%,var(--goi-green) 66.66%)}
+    .brand-badge{background:#fff;color:var(--goi-blue-dark);border-radius:.4rem;font-weight:600;padding:.2rem .5rem;font-size:.8rem}
+    .shadow-soft{box-shadow:0 .35rem 1rem rgba(0,0,0,.06)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+    .card-icon{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:.5rem;background:#e7efff;color:var(--goi-blue-dark)}
+    .small-muted{font-size:.92rem;color:#6c757d}
+
+    /* Chips / tag cloud — capped & collapsible; mobile becomes horizontal scroll */
+    .chip{border:1px solid #ced4da;border-radius:9999px;padding:.15rem .55rem;display:inline-flex;gap:.35rem;align-items:center;font-size:.8rem;white-space:nowrap}
+    .chip.active{background:var(--goi-blue);color:#fff;border-color:var(--goi-blue)}
+    .chip-group{display:flex;flex-wrap:wrap;gap:.4rem;max-height:72px;overflow:hidden}
+    .chip-group.expanded{max-height:none}
+    .chips-mobile{display:flex;gap:.4rem;overflow-x:auto;white-space:nowrap;padding-bottom:.25rem}
+    .chips-mobile::-webkit-scrollbar{height:6px}
+    .chips-mobile::-webkit-scrollbar-thumb{background:#ced4da;border-radius:9999px}
+
+    /* Cards and spacing */
+    .card.h-100{border-color:#e7edf7}
+
+    /* Accessibility helpers */
+    .visually-hidden-focusable:active,.visually-hidden-focusable:focus{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}
+
+    @media (max-width: 767.98px){
+      header .lead{font-size:1rem}
+      .brand-badge{display:none}
+    }
+  </style>
+</head>
+<body>
+  <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 p-2 bg-white border rounded" href="#main">Skip to content</a>
+
+  <!-- Brand strip -->
+  <div class="brand-bar py-2">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-shield-check fs-5" aria-hidden="true"></i>
+        <span class="fw-semibold" data-i18n="brand_title">Digital Safety Labs</span>
+        <span class="brand-badge ms-2" data-i18n="brand_badge">Education • Awareness</span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <a id="repoTop" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener" href="#"><i class="bi bi-github me-1" aria-hidden="true"></i><span data-i18n="verify">Verify on GitHub</span></a>
+        <button id="langToggle" class="btn btn-light btn-sm" type="button">हिंदी</button>
+      </div>
+    </div>
+  </div>
+  <div class="tri-strip"></div>
+
+  <!-- Header -->
+  <header class="py-4 border-bottom">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="small">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><span data-i18n="bc_home">Home</span></li>
+          <li class="breadcrumb-item active" aria-current="page"><span data-i18n="bc_hub">Cyber Awareness Hub</span></li>
+        </ol>
+      </nav>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-8">
+          <h1 class="h2 mb-2" data-i18n="hero_title">Cyber Awareness Training Hub</h1>
+          <p class="lead mb-3" data-i18n="hero_sub">Formal, classroom‑ready simulations for Indian users. Lightweight pages that run entirely in your browser — suitable for schools, NGOs, and rural trainings.</p>
+          <ul class="mb-0 small">
+            <li data-i18n="hero_b1">No backend servers. Uses <span class="mono">localStorage</span> only.</li>
+            <li data-i18n="hero_b2">Hindi/English labels, large buttons, high contrast.</li>
+            <li data-i18n="hero_b3">Focus: UPI/QR scams, parcel fee frauds, cookie consent, screen‑share risks.</li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <div class="p-3 border rounded-3 shadow-soft bg-light">
+            <div class="h6 mb-2" data-i18n="box_title">Data handling (please read)</div>
+            <ul class="small mb-2">
+              <li data-i18n="box_d1">All inputs stay in your browser; nothing is uploaded.</li>
+              <li data-i18n="box_d2">Use the in‑page <em>Reset</em> to clear <span class="mono">localStorage</span> between groups.</li>
+              <li data-i18n="box_d3">These pages are <strong>simulations for awareness</strong> — not real banking/courier services.</li>
+            </ul>
+            <div class="small-muted" data-i18n="box_help">If money is lost to a scam in India, call <strong>1930</strong> quickly to attempt freezing the transfer.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="py-4">
+    <div class="container">
+      <!-- Search & Filters (desktop) -->
+      <section class="mb-3 d-none d-md-block">
+        <div class="row g-2 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label small" for="search" data-i18n="search_label">Search demos</label>
+            <div class="input-group">
+              <span class="input-group-text" id="searchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+              <input id="search" class="form-control" aria-describedby="searchIcon" placeholder="UPI, QR, parcel, cookies…" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex justify-content-between align-items-center">
+              <label class="form-label small mb-0" data-i18n="filter_label">Filter by topic</label>
+              <button id="toggleTags" class="btn btn-link btn-sm text-decoration-none" type="button"><span class="me-1" id="toggleTagsText">Show more</span><i class="bi bi-chevron-down" id="toggleTagsIcon" aria-hidden="true"></i></button>
+            </div>
+            <div id="chips" class="chip-group mt-1" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile filter trigger -->
+      <section class="mb-3 d-md-none">
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary flex-grow-1" data-bs-toggle="offcanvas" data-bs-target="#filtersOffcanvas" aria-controls="filtersOffcanvas"><i class="bi bi-funnel me-1" aria-hidden="true"></i>Filters</button>
+          <div class="input-group">
+            <span class="input-group-text" id="searchIcon2"><i class="bi bi-search" aria-hidden="true"></i></span>
+            <input id="searchMobile" class="form-control" aria-describedby="searchIcon2" placeholder="Search demos" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Offcanvas (mobile filters) -->
+      <div class="offcanvas offcanvas-bottom" tabindex="-1" id="filtersOffcanvas" aria-labelledby="filtersLabel" style="height:50vh">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="filtersLabel">Filters</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="chips-mobile" id="chipsMobile" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- Demos grid -->
+      <section class="mb-4">
+        <div id="grid" class="row g-4">
+          <!-- cards injected by JS -->
+        </div>
+      </section>
+
+      <!-- About section -->
+      <section class="mb-5">
+        <div class="p-4 border rounded-3 bg-light shadow-soft">
+          <h2 class="h5 mb-3" data-i18n="about_title">About these simulations</h2>
+          <p class="mb-2 small" data-i18n="about_p1">Each page is a single HTML file using Bootstrap 5 (via cdnjs) and simple JavaScript. They are designed for “show and tell” in classrooms and community sessions, including rural areas with intermittent connectivity.</p>
+          <p class="mb-2 small" data-i18n="about_p2">To verify or contribute, review the open‑source code on GitHub. You may mirror the pages on your school/NGO website.</p>
+          <a id="repoBottom" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener" href="#"><i class="bi bi-github me-1" aria-hidden="true"></i><span data-i18n="verify">Verify on GitHub</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="border-top py-4">
+    <div class="container small text-muted">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-8">
+          <div class="fw-semibold" data-i18n="foot_title">Disclaimer</div>
+          <p class="mb-0" data-i18n="foot_p1">This independent project is for awareness and training only. It is not affiliated with any government or bank and does not process real payments.</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <span class="me-2"><i class="bi bi-shield-lock" aria-hidden="true"></i></span>
+          <span class="mono">localStorage</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- How it works modal -->
+  <div class="modal fade" id="howModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="howTitle">How it works</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="howList" class="mb-0"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // ===== Configure your repo URL here =====
+    const REPO_URL = 'https://github.com/divyamohan1993/digital-safety-labs';
+
+    // ===== Demos registry =====
+    const DEMOS = [
+      { id:'classroom', file:'classroom.html', icon:'bi-journal-check', title:'Digital Safety Classroom', desc:'Cookies & consent, email subscribe/unsubscribe, phone-for-discount, leak feed, scam predictions.', tags:['cookies','email','phone','leaks','scams','classroom'], how:['Consent: Accept vs Reject toggles a mock tracker (events visible).','Email: Local inbox only; unsubscribe updates the audit log.','Phone: Partner-sharing setting simulates third-party leaks.','Scam simulator: Generates likely attacks from provided inputs.'] },
+      { id:'upi', file:'upi-fraud-simulator.html', icon:'bi-cash-coin', title:'UPI / KYC Fraud Simulator', desc:'Suspicious SMS → fake KYC form → UPI collect request. Demonstrates that entering UPI PIN sends money.', tags:['upi','sms','kyc','collect','otp'], how:['Shows urgency tricks; never follow links from SMS.','Explains why refunds never need your UPI PIN.'] },
+      { id:'qr', file:'qr-receive-scam-simulator.html', icon:'bi-qr-code', title:'“Scan to Receive” QR Scam', desc:'Decodes QR to upi://pay (payment). Payment screen asks for UPI PIN — do not enter PIN to receive money.', tags:['qr','upi','pin'], how:['UPI intent values (pa, pn, am, tn) displayed.','Reject requests that ask for your PIN to receive.'] },
+      { id:'screen', file:'remote-screenshare-scam.html', icon:'bi-display', title:'Remote Screen‑Share Scam', desc:'Caller poses as support; pushes remote app + permissions; risks of OTP/PIN capture shown.', tags:['remote-app','otp','permissions'], how:['Avoid granting screen/SMS/accessibility permissions to unknown callers.','Use official in‑app support only.'] },
+      { id:'parcel', file:'parcel-fee-scam-simulator.html', icon:'bi-box-seam', title:'Parcel / Customs Fee Scam', desc:'Fake courier SMS with ₹49–₹99 fee; card/UPI flows show how tiny charges can save card and cause larger losses.', tags:['parcel','card','upi','phishing'], how:['Check courier status via official app/site you open yourself.','Do not enter card/UPI details from SMS links.'] }
+    ];
+
+    // Build unique tags
+    const ALL_TAGS = Array.from(new Set(DEMOS.flatMap(d=>d.tags))).sort();
+
+    // Rendering
+    function cardTpl(d){
+      return `
+      <div class="col-12 col-md-6 col-xl-4">
+        <div class="card h-100 shadow-soft">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="card-icon"><i class="bi ${d.icon}" aria-hidden="true"></i></span>
+              <h2 class="h5 fw-semibold mb-0">${esc(d.title)}</h2>
+            </div>
+            <p class="small mb-3">${esc(d.desc)}</p>
+            <div class="mb-3 d-flex flex-wrap gap-1">
+              ${d.tags.map(t=>`<span class=\"chip\" data-tag=\"${esc(t)}\">${esc(t)}</span>`).join('')}
+            </div>
+            <div class="d-flex gap-2">
+              <a class="btn btn-primary" href="./${encodeURIComponent(d.file)}"><i class="bi bi-box-arrow-up-right me-1" aria-hidden="true"></i><span data-i18n="open_demo">Open demo</span></a>
+              <button class="btn btn-outline-secondary" data-demo="${d.id}" onclick="openHow(event)"><i class="bi bi-info-circle me-1" aria-hidden="true"></i><span data-i18n="how_work">How it works</span></button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function chipTpl(tag){ return `<button class="chip" type="button" data-chip="${esc(tag)}"><i class=\"bi bi-tag\" aria-hidden=\"true\"></i>${esc(tag)}</button>`; }
+
+    function renderGrid(list){ document.getElementById('grid').innerHTML = list.map(cardTpl).join(''); }
+
+    // Desktop chips: cap and expand
+    function renderChips(){
+      const chipsEl = document.getElementById('chips');
+      const MAX = 12; // cap to avoid layout breaks
+      const base = ALL_TAGS.slice(0, MAX).map(chipTpl).join('');
+      const extra = ALL_TAGS.slice(MAX).map(chipTpl).join('');
+      chipsEl.innerHTML = base + (extra? `<span id=\"extraTags\" class=\"d-none\">${extra}</span>` : '');
+      if(!extra){ document.getElementById('toggleTags').classList.add('invisible'); }
+    }
+
+    // Mobile chips: horizontal scroll
+    function renderChipsMobile(){ document.getElementById('chipsMobile').innerHTML = ALL_TAGS.map(chipTpl).join(''); }
+
+    // Filtering
+    function activeTags(){ return Array.from(document.querySelectorAll('[data-chip].active')).map(b=>b.getAttribute('data-chip')); }
+    function applyFilter(){
+      const qDesktop = document.getElementById('search')?.value?.toLowerCase?.() || '';
+      const qMobile = document.getElementById('searchMobile')?.value?.toLowerCase?.() || '';
+      const q = (qMobile || qDesktop).trim();
+      const act = activeTags();
+      const out = DEMOS.filter(d=>{
+        const hitQ = !q || d.title.toLowerCase().includes(q) || d.desc.toLowerCase().includes(q) || d.tags.join(' ').includes(q);
+        const hitT = act.length===0 || act.every(t=>d.tags.includes(t));
+        return hitQ && hitT;
+      });
+      renderGrid(out);
+    }
+
+    // Modal
+    function openHow(e){
+      const id = e.currentTarget.getAttribute('data-demo');
+      const d = DEMOS.find(x=>x.id===id); if(!d) return;
+      document.getElementById('howTitle').textContent = d.title + ' — ' + (lang==='en'?'How it works':'कैसे काम करता है');
+      document.getElementById('howList').innerHTML = d.how.map(item=>`<li class=\"mb-1\">${esc(item)}</li>`).join('');
+      new bootstrap.Modal(document.getElementById('howModal')).show();
+    }
+
+    // Utilities
+    function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+
+    // Language
+    const I18N={
+      en:{ brand_title:'Digital Safety Labs', brand_badge:'Education • Awareness', verify:'Verify on GitHub', bc_home:'Home', bc_hub:'Cyber Awareness Hub', hero_title:'Cyber Awareness Training Hub', hero_sub:'Formal, classroom‑ready simulations for Indian users. Lightweight pages that run entirely in your browser — suitable for schools, NGOs, and rural trainings.', hero_b1:'No backend servers. Uses localStorage only.', hero_b2:'Hindi/English labels, large buttons, high contrast.', hero_b3:'Focus: UPI/QR scams, parcel fee frauds, cookie consent, screen‑share risks.', box_title:'Data handling (please read)', box_d1:'All inputs stay in your browser; nothing is uploaded.', box_d2:'Use the in‑page Reset to clear localStorage between groups.', box_d3:'These pages are simulations for awareness — not real banking/courier services.', box_help:'If money is lost to a scam in India, call 1930 quickly to attempt freezing the transfer.', search_label:'Search demos', filter_label:'Filter by topic', about_title:'About these simulations', about_p1:'Each page is a single HTML file using Bootstrap 5 (via cdnjs) and simple JavaScript. They are designed for “show and tell” in classrooms and community sessions, including rural areas with intermittent connectivity.', about_p2:'To verify or contribute, review the open‑source code on GitHub. You may mirror the pages on your school/NGO website.', foot_title:'Disclaimer', foot_p1:'This independent project is for awareness and training only. It is not affiliated with any government or bank and does not process real payments.', open_demo:'Open demo', how_work:'How it works' },
+      hi:{ brand_title:'डिजिटल सेफ़्टी लैब्स', brand_badge:'शिक्षा • जागरूकता', verify:'GitHub पर देखें', bc_home:'होम', bc_hub:'साइबर जागरूकता हब', hero_title:'साइबर जागरूकता प्रशिक्षण हब', hero_sub:'भारतीय उपयोगकर्ताओं के लिए औपचारिक, कक्षा‑उपयुक्त सिमुलेशन। हल्के पेज जो आपके ब्राउज़र में ही चलते हैं — स्कूल, NGO और ग्रामीण प्रशिक्षण के लिए उपयुक्त।', hero_b1:'कोई बैकएंड सर्वर नहीं। केवल localStorage।', hero_b2:'हिंदी/अंग्रेज़ी लेबल, बड़े बटन, हाई‑कॉन्ट्रास्ट।', hero_b3:'UPI/QR ठगी, पार्सल फ़ीस, कुकी सहमति, स्क्रीन‑शेयर जोखिम।', box_title:'डाटा हैंडलिंग (कृपया पढ़ें)', box_d1:'सारे इनपुट आपके ब्राउज़र में रहते हैं; कुछ भी अपलोड नहीं होता।', box_d2:'बैच बदलते समय Reset दबाएँ — localStorage साफ़ हो जाएगा।', box_d3:'ये पेज जागरूकता हेतु सिमुलेशन हैं — असली बैंक/कूरियर सेवा नहीं।', box_help:'यदि धोखाधड़ी में पैसा कट गया है, तो 1930 पर तुरंत कॉल करें ताकि ट्रांसफ़र फ्रीज़ करने की कोशिश हो सके।', search_label:'डेमो खोजें', filter_label:'विषय अनुसार फ़िल्टर', about_title:'इन सिमुलेशनों के बारे में', about_p1:'हर पेज एक सिंगल HTML फ़ाइल है (Bootstrap 5 — cdnjs) और सरल जावास्क्रिप्ट। कक्षा/समुदाय सत्रों में “दिखाकर समझाने” के लिए बनाया गया है, ग्रामीण क्षेत्रों में भी उपयोगी।', about_p2:'सत्यापन या योगदान के लिए GitHub पर स्रोत‑कोड देखें। आप इन्हें अपने स्कूल/NGO वेबसाइट पर मिरर कर सकते हैं।', foot_title:'अस्वीकरण', foot_p1:'यह स्वतंत्र परियोजना केवल जागरूकता और प्रशिक्षण हेतु है। यह किसी सरकारी संस्था/बैंक से संबद्ध नहीं और असली भुगतान नहीं करती।', open_demo:'डेमो खोलें', how_work:'कैसे काम करता है' }
+    };
+
+    let lang = localStorage.getItem('DSL_LANG') || (navigator.language.startsWith('hi') ? 'hi' : 'en');
+    function applyLang(){ const L = I18N[lang] || I18N.en; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(L[k]) el.innerHTML = L[k]; }); document.getElementById('langToggle').textContent = (lang==='en'?'हिंदी':'English'); }
+
+    // Init
+    function init(){
+      // Repo links
+      document.getElementById('repoTop').href = REPO_URL; 
+      document.getElementById('repoBottom').href = REPO_URL;
+
+      renderChips();
+      renderChipsMobile();
+      renderGrid(DEMOS);
+      applyLang();
+
+      // Desktop interactions
+      document.getElementById('chips').addEventListener('click', (e)=>{ const b=e.target.closest('[data-chip], .chip'); if(!b) return; b.classList.toggle('active'); applyFilter(); });
+      document.getElementById('search').addEventListener('input', applyFilter);
+      document.getElementById('toggleTags').addEventListener('click', ()=>{
+        const extra = document.getElementById('extraTags');
+        const text = document.getElementById('toggleTagsText');
+        const icon = document.getElementById('toggleTagsIcon');
+        if(extra){
+          const hidden = extra.classList.toggle('d-none');
+          text.textContent = hidden ? 'Show more' : 'Show fewer';
+          icon.classList.toggle('bi-chevron-down', hidden);
+          icon.classList.toggle('bi-chevron-up', !hidden);
+        }
+      });
+
+      // Mobile interactions
+      document.getElementById('chipsMobile').addEventListener('click', (e)=>{ const b=e.target.closest('[data-chip], .chip'); if(!b) return; b.classList.toggle('active'); applyFilter(); });
+      document.getElementById('searchMobile').addEventListener('input', applyFilter);
+
+      document.getElementById('langToggle').addEventListener('click', ()=>{ lang=(lang==='en'?'hi':'en'); localStorage.setItem('DSL_LANG', lang); applyLang(); });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

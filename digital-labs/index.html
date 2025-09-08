@@ -281,7 +281,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     // ======= Minimal, offline, static demo logic =======
-    const KEY = 'DSC_V1';
+    // BEFORE: const KEY = 'DSC_V1';
+    const SLUG = (location.pathname.split('/').filter(Boolean).pop() || 'classroom')
+      .replace(/[^a-z0-9-]/gi, '_')
+      .toLowerCase();
+    const KEY = `DSL_${SLUG}_V1`;
+
     const DEFAULT = () => ({
       version: '1.0.0',
       sessionId: 'dsc-' + Math.random().toString(36).slice(2,10),
@@ -481,7 +486,9 @@
     function resetAll(){ localStorage.removeItem(KEY); sessionStorage.clear(); state = DEFAULT(); save(); location.reload(); }
 
     // ===== Helpers =====
-    function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+    // function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+    function escapeHtml(s){ s = String(s ?? ''); return s.replace(/[&<>\"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c])); }
+
 
     // ===== Language toggle (minimal EN/HI for key labels) =====
     const I18N = {

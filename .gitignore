@@ -1,0 +1,10 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Site outputs (if you ever add GH Pages builds)
+dist/
+out/

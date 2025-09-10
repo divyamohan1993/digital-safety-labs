@@ -1,48 +1,135 @@
 # Digital Safety Labs
 
-Lightweight, **offline-first** demos to teach digital safety: cookie consent,
-email subscriptions, phone-for-discounts, “partner” data sharing, and how these
-fuel common scams. Each demo is a single static page (Bootstrap 5.3 via CDN)
-that runs entirely in the browser using `localStorage`.
+Practical, offline-first simulations that teach how common digital scams work—and how to stay safe. Built as single-file HTML demos that run entirely in the browser.
 
-> Purpose-built for schools, NGOs, rural trainings, CSR, and community sessions.
-
----
-
-## What’s inside
-
-- **demos/cookies/** – Accept/Reject/Customize consent; mock tracker pings; event log  
-- **demos/email/** – Subscribe/Unsubscribe; local inbox (no network); audit log  
-- **demos/phone/** – Discount flow; SMS/e-bill/partner-sharing toggles; leak feed  
-- **demos/scam-simulator/** – Uses provided data to generate likely scam scenarios  
-- **assets/** – Minimal shared utilities (`core.js`, `i18n.json`, optional `style.css`)  
-- **index.html** – Hub page listing all demos  
-- **vm/** – (Optional) one-shot GCP VM script for connected classrooms
-
-All demo data is stored under a **unique, namespaced key**:
-`localStorage["DSL_<demoSlug>_V1"]` to keep modules isolated.
+**Live:** https://dmj.one/labs/digital-safety/  
+**Repo:** https://github.com/divyamohan1993/digital-safety-labs  
+**Initiative:** Part of **dmj.one** — Quality Education for All.
 
 ---
 
-## Why this works in the field
+## Why this exists
+- **Activity-first learning:** People remember what they *do*, not what they read.
+- **Zero setup:** No installs, no accounts, no servers. Works in labs, classrooms, villages, and on shared PCs.
+- **Privacy by design:** No analytics, no trackers, no network calls for user data.
 
-- **Runs offline** on old hardware and 1 vCPU / ~0.6–1 GB RAM VMs.
-- **Show, don’t tell:** live logs, leak feed, and scam predictions from *their* inputs.
-- **Rural-ready UI:** large buttons, short lines, EN/HI labels, minimal text.
-- **Privacy-first:** no analytics, no backends, no data leaves the browser.
+---
+
+## What you get
+- A hub page that links to multiple interactive scam/privacy simulations.
+- Each simulation is a **single HTML page** (HTML + minimal JS/CSS), optimized for:
+  - mobile + low-end hardware,
+  - offline/patchy internet,
+  - large buttons, clear prompts, and short sessions.
+
+> These are **educational simulations**. They never perform real payments, logins, or data sharing.
 
 ---
 
 ## Quick start
 
-### A) Totally offline (recommended)
-1. Download the repo (or just a demo subfolder).
-2. Open any `index.html` in a modern browser.
-3. Use **Reset** between groups to clear `localStorage`.
+**Open locally (recommended)**
+1. Download or clone the repo.
+2. Open `index.html` in a modern browser.  
+   (You can also open any simulation HTML directly.)
 
-### B) Cloud (Nginx on a tiny VM)
+**Serve statically (optional)**
 ```bash
-sudo apt update && sudo apt -y install nginx
-sudo cp -r demos /var/www/html/
-sudo cp index.html /var/www/html/index.html
-# Open http://<VM_IP>/
+# From the repo root
+python -m http.server 8080
+# visit http://localhost:8080
+````
+
+---
+
+## Data & privacy
+
+* Runs fully client-side; inputs remain in the browser.
+* No collection of personal data; no third-party trackers.
+* Some UI assets may load from public CDNs (CSS/JS only).
+* Do **not** use real passwords/OTP/card numbers in workshops—use sample data.
+
+---
+
+## Using in classrooms / community drives
+
+* Works with shared machines and low bandwidth.
+* Clear “Reset/Clear” controls to wipe any local demo state between groups.
+* Designed for 10–20 minute micro-sessions.
+* Suitable for first-time internet users: minimal text, more interaction.
+
+---
+
+## Adding a new lab (scales without changing this README)
+
+**Principles**
+
+* Keep it **one self-contained HTML file**.
+* No network calls that process personal data.
+* Prefer Bootstrap (via CDN) or minimal CSS; avoid heavy frameworks.
+* Use large, accessible controls; support keyboard and screen readers where possible.
+* Add a short intro panel inside the page: *“What this teaches”* and *“Safety takeaways.”*
+
+**Template (starter skeleton)**
+
+```html
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Digital Safety Lab — <Your Lab Title></title>
+  <meta name="description" content="Educational simulation. No real payments/logins. Client-side only.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>/* keep styles minimal; prefer utilities */</style>
+</head>
+<body class="container py-4">
+  <header class="mb-4">
+    <h1 class="h3">Digital Safety Lab — <Your Lab Title></h1>
+    <p class="text-muted small">Simulation for education. No data is sent to any server.</p>
+  </header>
+
+  <main>
+    <!-- Your interactive demo -->
+  </main>
+
+  <hr class="my-4">
+  <section class="small">
+    <strong>What this teaches:</strong> …  
+    <strong>Safety takeaways:</strong> …  
+    <button class="btn btn-outline-secondary btn-sm mt-2" onclick="localStorage.clear();sessionStorage.clear();location.reload()">Reset</button>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
+```
+
+> The live hub automatically surfaces new labs from the `/digital-labs` directory—no README edits required.
+
+---
+
+## Contributing
+
+We welcome improvements and new simulations.
+
+1. Read the **[Contributing Guide](./CONTRIBUTING.md)** and **[Code of Conduct](./CODE_OF_CONDUCT.md)**.
+2. Follow the **single-file** and **privacy-first** rules above.
+3. Open a PR with:
+
+   * a clear title and short summary,
+   * screenshots or a short GIF (optional but helpful).
+
+**Security issues:** please see our **[Security Policy](./SECURITY.md)** for responsible disclosure.
+
+---
+
+## License
+
+Released under the **[MIT License](./LICENSE)**. Use, adapt, and teach freely. Just don't sue.
+
+---
+
+## Credits
+
+Created and maintained by the **dmj.one** community to make cyber-safety education accessible, practical, and free.

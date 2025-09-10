@@ -1,6 +1,6 @@
 # Digital Safety Labs
 
-Practical, offline-first simulations that teach how common digital scams work—and how to stay safe. Built as single-file HTML demos that run entirely in the browser.
+Practical, offline-first simulations that teach how common digital scams work and how to stay safe. Built as single-file HTML demos that run entirely in the browser.
 
 **Live:** https://dmj.one/labs/digital-safety/  
 **Repo:** https://github.com/divyamohan1993/digital-safety-labs  
